@@ -1,0 +1,114 @@
+/* ==UserStyle==
+@name           Youtube Navbar Tweaks
+@namespace      youtube.com
+@version        0.3
+@description    tweaks for youtube navbar
+@homepageURL  	https://github.com/zenstorage/navbar-tweaks
+@supportURL	    https://github.com/zenstorage/navbar-tweaks/issues
+@author         hdyzen
+@preprocessor   stylus
+@license        MIT
+
+
+@var select style 'Style' {
+	"Default*": "null",
+	"Acrylic": "acrylic()",
+	"Transparent": "transparent()"
+}
+@var checkbox navbarS 'Overlay Navbar' 1
+@var range navbar 'Navbar Showing' [35, 0, 56, 1, 'px']
+@var number delay 'Navbar Delay' [0.2, 0, 4, 0.1, 's']
+
+
+==/UserStyle== */
+@-moz-document domain("youtube.com") {
+
+
+	/* Variaveis */
+
+	i=!important
+
+	/* Mixins */
+	acrylic() {
+		background rgba(15, 15, 15, .2) i;
+		backdrop-filter blur(3px) i;
+	}
+
+	transparent() {
+		background rgba(15, 15, 15, .6) i;
+	}
+
+
+	/* Barra de navegação */
+	#masthead-container {
+		top: - navbar i;
+		transition: delay ease i;
+		/* display: none; */
+	}
+
+	#masthead-container:hover,
+	#masthead-container:focus-within {
+		top: 0px i;
+	}
+
+	/* Estilo barra de navegação */
+	#background,
+	#container.ytd-searchbox,
+	#search-icon-legacy,
+	.sbsb_a {
+		style
+	}
+
+	/* Videos da oagina inicial */
+	#page-manager {
+		--navbar: navbar;
+		margin-top: calc(56px - var(--navbar)) i;
+	}
+
+	/* Barra de navegação sobreposta */
+	if navbarS {
+		#page-manager {
+			margin-top: 0 i;
+		}
+	}
+
+	/* Assuntos recentes */
+	#chips-wrapper {
+		top: 20px i;
+		/* display: none; */
+	}
+
+	/* Fundo resultados da barra de pesquisa */
+	.sbdd_b {
+		border: none i;
+		background: none i;
+	}
+
+	/* Resultados */
+	.sbpqs_a,
+	.sbqs_c b {
+		color: rgb(241, 241, 241) i;
+	}
+
+	/* Icones recentes */
+	.sbpqs_a::before,
+	.sbqs_c::before {
+		filter: invert(1) i;
+	}
+
+	/* Mouse sobre um resultado */
+	.sbsb_d {
+		background: rgba(11, 11, 11, .3) i;
+	}
+
+	/* Denunciar pesquisas */
+	.sbfl_b {
+		display: none i;
+	}
+
+	/* Barra de navegação cima */
+	.sbsb_a {
+		transform: translateY(5px) i;
+		border-radius: 0 0 12px 12px i;
+	}
+}
