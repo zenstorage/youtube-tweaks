@@ -1,10 +1,8 @@
 /* ==UserStyle==
 @name           Youtube Navbar Tweaks
 @namespace      youtube.com
-@version        0.3
+@version        0.4
 @description    tweaks for youtube navbar
-@homepageURL  	https://github.com/zenstorage/navbar-tweaks
-@supportURL	    https://github.com/zenstorage/navbar-tweaks/issues
 @author         hdyzen
 @preprocessor   stylus
 @license        MIT
@@ -15,7 +13,8 @@
 	"Acrylic": "acrylic()",
 	"Transparent": "transparent()"
 }
-@var checkbox navbarS 'Overlay Navbar' 1
+@var checkbox navbarS 'Overlay Navbar' 0
+@var checkbox smallThumbnail 'Small Thumbnails' 1
 @var range navbar 'Navbar Showing' [35, 0, 56, 1, 'px']
 @var number delay 'Navbar Delay' [0.2, 0, 4, 0.1, 's']
 
@@ -25,8 +24,10 @@
 
 
 	/* Variaveis */
-
 	i=!important
+
+
+
 
 	/* Mixins */
 	acrylic() {
@@ -35,7 +36,7 @@
 	}
 
 	transparent() {
-		background rgba(15, 15, 15, .6) i;
+		background rgba(15, 15, 15, .4) i;
 	}
 
 
@@ -110,5 +111,55 @@
 	.sbsb_a {
 		transform: translateY(5px) i;
 		border-radius: 0 0 12px 12px i;
+	}
+
+	/* Youtube Small Thumbnails - Normal Size (archived) converted from userscript by vaporwave9 */
+	if smallThumbnail {
+		ytd-rich-grid-renderer {
+			--ytd-rich-grid-items-per-row: 6 !important;
+			--ytd-rich-grid-posts-per-row: 6 !important;
+			--ytd-rich-grid-slim-items-per-row: 6 !important;
+		}
+
+		ytd-rich-grid-renderer > #contents > ytd-rich-grid-row,
+		ytd-rich-grid-renderer > #contents > ytd-rich-grid-row > #contents {
+			display: contents;
+		}
+
+		ytd-rich-item-renderer {
+			min-width: 210px;
+		}
+
+		#avatar-link {
+			display: none;
+		}
+
+		#video-title {
+			font-size: 1.4rem !important;
+		}
+
+		#channel-name.ytd-video-meta-block {
+			font-size: 1.3rem !important;
+		}
+
+		#metadata-line {
+			font-size: 1.3rem !important;
+		}
+
+		.ytd-video-renderer:not([use-prominent-thumbs]) ytd-thumbnail.ytd-video-renderer {
+			flex: none;
+			width: 246px;
+			height: 138px;
+		}
+
+		ytd-playlist-renderer[use-prominent-thumbs] ytd-playlist-thumbnail.ytd-playlist-renderer {
+			max-width: 246px;
+			min-width: 240px;
+		}
+
+		ytd-radio-renderer[use-prominent-thumbs] ytd-thumbnail.ytd-radio-renderer {
+			max-width: 246px;
+			min-width: 240px;
+		}
 	}
 }
