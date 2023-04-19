@@ -1,8 +1,8 @@
 /* ==UserStyle==
-@name           Youtube Navbar Tweaks
+@name           Youtube Tweaks
 @namespace      youtube.com
-@version        0.4
-@description    tweaks for youtube navbar
+@version        0.5
+@description    tweaks for youtube
 @author         hdyzen
 @preprocessor   stylus
 @license        MIT
@@ -13,10 +13,12 @@
 	"Acrylic": "acrylic()",
 	"Transparent": "transparent()"
 }
-@var checkbox navbarS 'Overlay Navbar' 0
-@var checkbox smallThumbnail 'Small Thumbnails' 1
-@var range navbar 'Navbar Showing' [35, 0, 56, 1, 'px']
-@var number delay 'Navbar Delay' [0.2, 0, 4, 0.1, 's']
+@var checkbox 	navbarS 		'Overlay Navbar' 	0
+@var range 		navbar 			'Navbar Showing' 	[35, 0, 56, 1, 'px']
+@var number 	delay 			'Navbar Delay' 		[0.2, 0, 4, 0.1, 's']
+@var checkbox 	customThumbs 	'Custom Thumbnails' 1
+@var number  	thumbsRow 		'Rows' 				[6, 4, 10, 1]
+@var number  	fontSize 		'Font Size' 		[1.3, 1, 2, 0.1, 'rem']
 
 
 ==/UserStyle== */
@@ -36,7 +38,8 @@
 	}
 
 	transparent() {
-		background rgba(15, 15, 15, .4) i;
+		background rgba(15, 15, 15, .3) i;
+		backdrop-filter: grayscale(30%) i;
 	}
 
 
@@ -54,10 +57,14 @@
 
 	/* Estilo barra de navegação */
 	#background,
-	#container.ytd-searchbox,
-	#search-icon-legacy,
 	.sbsb_a {
 		style
+	}
+	/* Barra de pesquisa  */
+	#container.ytd-searchbox,
+	#search-icon-legacy {
+		background rgba(15, 15, 15, .6) i;
+		border: none i;
 	}
 
 	/* Videos da oagina inicial */
@@ -112,13 +119,22 @@
 		transform: translateY(5px) i;
 		border-radius: 0 0 12px 12px i;
 	}
-
+	/* Pagina do canal */
+	#primary.ytd-two-column-browse-results-renderer {
+		position: relative i;
+		top:  35px i;
+	}
+	ytd-section-list-renderer.style-scope > div:nth-child(2) {
+		position: relative i;
+		top: 20px i;
+	}
+	
 	/* Youtube Small Thumbnails - Normal Size (archived) converted from userscript by vaporwave9 */
-	if smallThumbnail {
+	if customThumbs {
 		ytd-rich-grid-renderer {
-			--ytd-rich-grid-items-per-row: 6 !important;
-			--ytd-rich-grid-posts-per-row: 6 !important;
-			--ytd-rich-grid-slim-items-per-row: 6 !important;
+			--ytd-rich-grid-items-per-row: thumbsRow  !important;
+			--ytd-rich-grid-posts-per-row: thumbsRow  !important;
+			--ytd-rich-grid-slim-items-per-row: thumbsRow  !important;
 		}
 
 		ytd-rich-grid-renderer > #contents > ytd-rich-grid-row,
@@ -135,15 +151,16 @@
 		}
 
 		#video-title {
-			font-size: 1.4rem !important;
+			--fontSize: fontSize;
+			font-size: calc(0.1rem + var(--fontSize)) i;
 		}
 
 		#channel-name.ytd-video-meta-block {
-			font-size: 1.3rem !important;
+			font-size: fontSize !important;
 		}
 
 		#metadata-line {
-			font-size: 1.3rem !important;
+			font-size: fontSize !important;
 		}
 
 		.ytd-video-renderer:not([use-prominent-thumbs]) ytd-thumbnail.ytd-video-renderer {
