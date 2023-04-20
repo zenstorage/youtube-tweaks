@@ -16,7 +16,7 @@
 @var checkbox 	navbarS 		'Overlay Navbar' 		0
 @var range 		navbar 			'Navbar Showing' 		[35, 0, 56, 1, 'px']
 @var number 	delay 			'Navbar Delay' 			[0.2, 0, 4, 0.1, 's']
-@var checkbox  	searchboxHover  'Search Bar Hover Dark' 0
+@var checkbox  	searchbarHover  'Search Bar Hover Dark' 0
 @var checkbox	customLogo		'Custom Logo'			0
 @var text		logo			'Logo'					"'https://i.imgur.com/Xytw68B.gif'"
 @var checkbox 	customThumbs 	'Custom Thumbnails' 	1
@@ -69,7 +69,7 @@
 	/* Barra de pesquisa  */
 	#container.ytd-searchbox,
 	#search-icon-legacy {
-		background rgba(15, 15, 15, .6) i;
+		background rgba(15, 15, 15, .2) i;
 		border: none i;
 	}
 
@@ -86,13 +86,13 @@
 		}
 	}
 
-	if searchboxHover {
+	if searchbarHover {
 		#container.ytd-searchbox {
 			transition: .2s ease;
 		}
 
 		#container.ytd-searchbox:hover {
-			background: rgba(15, 15, 15, 0.8);
+			background: rgba(15, 15, 15, .6) i;
 		}
 
 		#search-icon-legacy.ytd-searchbox {
@@ -100,7 +100,7 @@
 		}
 
 		#search-icon-legacy.ytd-searchbox:hover {
-			background: rgba(15, 15, 15, 0.8);
+			background: rgba(15, 15, 15, .6) i;
 		}
 	}
 
@@ -176,9 +176,9 @@
 	/* Youtube Small Thumbnails - Normal Size (archived) converted from userscript by vaporwave9 */
 	if customThumbs {
 		ytd-rich-grid-renderer {
-			--ytd-rich-grid-items-per-row: thumbsRow !important;
-			--ytd-rich-grid-posts-per-row: thumbsRow !important;
-			--ytd-rich-grid-slim-items-per-row: thumbsRow !important;
+			--ytd-rich-grid-items-per-row: thumbsRow i;
+			--ytd-rich-grid-posts-per-row: thumbsRow i;
+			--ytd-rich-grid-slim-items-per-row: thumbsRow i;
 		}
 
 		ytd-rich-grid-renderer > #contents > ytd-rich-grid-row,
@@ -200,11 +200,11 @@
 		}
 
 		#channel-name.ytd-video-meta-block {
-			font-size: fontSize !important;
+			font-size: fontSize i;
 		}
 
 		#metadata-line {
-			font-size: fontSize !important;
+			font-size: fontSize i;
 		}
 
 		.ytd-video-renderer:not([use-prominent-thumbs]) ytd-thumbnail.ytd-video-renderer {
